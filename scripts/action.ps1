@@ -74,6 +74,10 @@ ForEach-Object {
 
     & $_nugetExeLocation pack $nuspecPath -OutputDirectory "${packageDir}"
 
+    if ($LASTEXITCODE -ne 0){
+        exit $LASTEXITCODE
+    }
+
     Write-Host "Pack Complete"
 }
 
