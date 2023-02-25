@@ -1,5 +1,7 @@
 ## designed for powershell v1 because the servers the run this mess are... aNcIeNt
 
+$ErrorActionPreference  = "Stop"
+
 ## inputs
 $rvMajor                = $ENV:RV_MAJOR
 $rvMinor                = $ENV:RV_MINOR
@@ -13,7 +15,7 @@ $nugetPackageRepo       = $ENV:NUGET_PACKAGE_URI
 $nugetPackageUsername   = $ENV:NUGET_PACKAGE_USERNAME
 $nugetPackagePAT        = $ENV:NUGET_PACKAGE_PAT
 
-$_nugetExeLocation      = $PSScriptRoot/tools/nuget.exe
+$_nugetExeLocation      = "${PSScriptRoot}/tools/nuget.exe"
 
  ## ConvertFrom-Json is not available in powershell (whatever version we have)
 add-type -assembly system.web.extensions
