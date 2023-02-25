@@ -22,7 +22,6 @@ add-type -assembly system.web.extensions
 $ps_js = new-object system.web.script.serialization.javascriptSerializer
 
 $pkgs =  $ps_js.DeserializeObject($packages)
-$curDir = ${PWD} ## current working dir
 
 $pkgs | `
 ForEach-Object {
@@ -73,7 +72,7 @@ ForEach-Object {
 
     Write-Host "Packing file"
 
-    $PSScriptRoot/tools/nuget.exe pack $nuspecPath -OutputDirectory "${packageDir}"
+    & $_nugetExeLocation pack $nuspecPath -OutputDirectory "${packageDir}"
 
     Write-Host "Pack Complete"
 }
@@ -89,17 +88,17 @@ $exitCode = 0
 
 Get-ChildItem -Path "${packageDir}\*" -Include *.nupkg | `
     ForEach-Object {
-    $pkg = $_.FullName
-    $srcName = "For_${pkg}"
+        $pkg = $_.FullName
+        $srcName = "For_${pkg}"
 
-    & $_nugetExeLocation sources add -name "${srcName}" -Source $nugetPackageRepo -Username $nugetPackageUsername -Password $nugetPackagePAT
-    & $_nugetExeLocation push $pkg -NonInteractive -Source "${srcName}" -ApiKey $nugetPackagePAT
+        & $_nugetExeLocation sources add -name "${srcName}" -Source $nugetPackageRepo -Username $nugetPackageUsername -Password $nugetPackagePAT
+        & $_nugetExeLocation push $pkg -NonInteractive -Source "${srcName}" -ApiKey $nugetPackagePAT
 
-    Write-Host "Push Exit Code: $LASTEXITCODE"
+        Write-Host "Push Exit Code: $LASTEXITCODE"
 
-    $exitCode = $exitCode + $LASTEXITCODE
-    
-    & $_nugetExeLocation sources remove -name "${srcName}"
+        $exitCode = $exitCode + $LASTEXITCODE
+        
+        & $_nugetExeLocation sources remove -name "${srcName}"
     }
 
 Write-Host "Exiting with Code: ${exitCode}"
