@@ -92,14 +92,14 @@ Get-ChildItem -Path "${packageDir}\*" -Include *.nupkg | `
     $pkg = $_.FullName
     $srcName = "For_${pkg}"
 
-    $PSScriptRoot/tools/nuget.exe sources add -name "${srcName}" -Source $nugetPackageRepo -Username $nugetPackageUsername -Password $nugetPackagePAT
-    $PSScriptRoot/tools/nuget.exe push $pkg -NonInteractive -Source "${srcName}" -ApiKey $nugetPackagePAT
+    & $_nugetExeLocation sources add -name "${srcName}" -Source $nugetPackageRepo -Username $nugetPackageUsername -Password $nugetPackagePAT
+    & $_nugetExeLocation push $pkg -NonInteractive -Source "${srcName}" -ApiKey $nugetPackagePAT
 
     Write-Host "Push Exit Code: $LASTEXITCODE"
 
     $exitCode = $exitCode + $LASTEXITCODE
     
-    $PSScriptRoot/tools/nuget.exe sources remove -name "${srcName}"
+    & $_nugetExeLocation sources remove -name "${srcName}"
     }
 
 Write-Host "Exiting with Code: ${exitCode}"
