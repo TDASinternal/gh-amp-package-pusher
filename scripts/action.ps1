@@ -13,7 +13,7 @@ $releaseNotesFilePath   = $ENV:RELEASE_NOTES_FILE_PATH
 
 $nugetPackageRepo       = $ENV:NUGET_PACKAGE_URI
 $nugetPackageUsername   = $ENV:NUGET_PACKAGE_USERNAME
-$nugetPackaggePAT       = $ENV:NUGET_PACKAGE_PAT
+$nugetPackagePAT        = $ENV:NUGET_PACKAGE_PAT
 
 $_nugetExeLocation      = $PSScriptRoot/tools/nuget.exe
 
@@ -92,8 +92,8 @@ Get-ChildItem -Path "${packageDir}\*" -Include *.nupkg | `
     $pkg = $_.FullName
     $srcName = "For_${pkg}"
 
-    $PSScriptRoot/tools/nuget.exe sources add -name "${srcName}" -Source $nugetPackageRepo -Username $nugetPackageUsername -Password $nugetPackaggePAT
-    $PSScriptRoot/tools/nuget.exe push $pkg -NonInteractive -Source "${srcName}" -ApiKey $nugetPackaggePAT
+    $PSScriptRoot/tools/nuget.exe sources add -name "${srcName}" -Source $nugetPackageRepo -Username $nugetPackageUsername -Password $nugetPackagePAT
+    $PSScriptRoot/tools/nuget.exe push $pkg -NonInteractive -Source "${srcName}" -ApiKey $nugetPackagePAT
 
     Write-Host "Push Exit Code: $LASTEXITCODE"
 
