@@ -1,0 +1,55 @@
+name: AMP Suite Package Pusher
+author: TDASinternal
+description: >
+  Creates and pushes nuget packages for AMP Suite
+inputs:
+  RV_MAJOR:
+    description: The SemVer Major Version Part
+    required: true
+  RV_MINOR:
+    description: The SemVer MINOR Version Part
+    required: true
+  RV_PATCH:
+    description: The SemVer PATCH Version Part
+    required: true
+  PACKAGES:
+    description: The Packages Array
+    required: true
+  PACKAGE_DIR:
+    description: PACKAGE_DIR
+    required: true
+  BUILD_NUMBER:
+    description: BUILD_NUMBER
+    required: true
+  RELEASE_NOTES_FILE_PATH:
+    description: RELEASE_NOTES_FILE_PATH
+    required: true
+  NUGET_PACKAGE_URI:
+    description: NUGET_PACKAGE_URI
+    required: true
+  NUGET_PACKAGE_USERNAME:
+    description: NUGET_PACKAGE_USERNAME
+    required: true
+  NUGET_PACKAGE_PAT:
+    description: NUGET_PACKAGE_PAT
+    required: true
+runs:
+  using: composite
+  steps:
+    - run: ${{ github.action_path }}/scripts/action.ps1
+      id:  package-pusher
+      shell: pwsh
+      env:
+        RV_MAJOR                : ${{ inputs.RV_MAJOR }}
+        RV_MINOR                : ${{ inputs.RV_MINOR }}
+        RV_PATCH                : ${{ inputs.RV_PATCH }}
+        PACKAGES                : ${{ inputs.PACKAGES }}
+        PACKAGE_DIR             : ${{ inputs.PACKAGE_DIR }}
+        BUILD_NUMBER            : ${{ inputs.BUILD_NUMBER }}
+        RELEASE_NOTES_FILE_PATH : ${{ inputs.RELEASE_NOTES_FILE_PATH }}
+        NUGET_PACKAGE_URI       : ${{ inputs.NUGET_PACKAGE_URI }}
+        NUGET_PACKAGE_USERNAME  : ${{ inputs.NUGET_PACKAGE_USERNAME }}
+        NUGET_PACKAGE_PAT       : ${{ inputs.NUGET_PACKAGE_PAT }}
+branding:
+  icon: terminal
+  color: blue
