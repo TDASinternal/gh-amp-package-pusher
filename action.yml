@@ -38,7 +38,6 @@ runs:
   steps:
     - run: ${{ github.action_path }}/scripts/action.ps1
       id:  package-pusher
-      shell: pwsh
       env:
         RV_MAJOR                : ${{ inputs.RV_MAJOR }}
         RV_MINOR                : ${{ inputs.RV_MINOR }}

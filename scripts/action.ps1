@@ -1,5 +1,3 @@
-#!/usr/bin/env pwsh
-
 ## designed for powershell v1 because the servers the run this mess are... aNcIeNt
 
 ## inputs
