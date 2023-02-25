@@ -53,10 +53,10 @@ ForEach-Object {
     $xmlWriter.WriteElementString("version", $pkgVersion)
 
     #authors
-    $xmlWriter.WriteElementString("authors", "Engine Media and Gaming")
+    $xmlWriter.WriteElementString("authors", $nugetPackageUsername)
 
     #owners
-    $xmlWriter.WriteElementString("owners", "Engine Media and Gaming")
+    $xmlWriter.WriteElementString("owners", $nugetPackageUsername)
 
     ##release notes
     $xmlWriter.WriteElementString("releaseNotes", $(Get-Content -Path $releaseNotesFilePath))
