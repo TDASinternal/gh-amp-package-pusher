@@ -15,7 +15,7 @@ $nugetPackageRepo       = $ENV:NUGET_PACKAGE_URI
 $nugetPackageUsername   = $ENV:NUGET_PACKAGE_USERNAME
 $nugetPackagePAT        = $ENV:NUGET_PACKAGE_PAT
 
-$_nugetExeLocation      = "${ENV:GITHUB_WORKSPACE}/tools/nuget.exe"
+$_nugetExeLocation      = "${ENV:GITHUB_ACTION_PATH}/tools/nuget.exe"
 
  ## ConvertFrom-Json is not available in powershell (whatever version we have)
 add-type -assembly system.web.extensions
